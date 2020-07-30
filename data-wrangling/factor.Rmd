@@ -1,0 +1,122 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+# Apa itu factor?
+Factor adalah suatu variable di bahasa R yang menyimpan nilai-nilai kategori atau nominal. Berikut beberapa nilai kategori yang dapat disimpan factor
+- Nama bulan: Januari, Februari, Maret, ...
+- Jenis Pakaian: Atasan, bawahan, ...
+- Satuan: Kg, Mg, ton, kwintal, ...
+
+In the nutshell: factor -> variabel kategorik
+
+# Kapan factor digunakan?
+Factor digunakan ketika dapat memastikan bahwa variabel yang kita gunakan memiliki data terbatas (diskrit)
+
+# Cara membuat Factor
+factor dapat dibuat dengan menggunakan fungsi `factor`. Syntax untuk melakukannya adalah
+
+```
+factor(x = vector)
+```
+
+atau
+
+```
+factor(vector)
+```
+
+Sebagai contoh
+
+```{r}
+factor(c("Jan", "feb", "mar"))
+```
+# Melihat Atribut Levels dan Class pada Factor
+
+```{r}
+faktor.bulan <- factor(c("Jan", "Feb", "Mar"))
+attributes(faktor.bulan)
+```
+
+```{r}
+faktor.bulan <- factor(c("Jan", "Feb", "Mar"))
+levels(faktor.bulan)
+class(faktor.bulan)
+```
+
+# Perulangan Nilai pada Factor
+Levels: atribut yang menempel pada setiap faktor dan berisi daftar diskrit dari variasi nilai-nilai yang terdapat pada faktor
+
+```{r}
+factor(c("Jan", "Feb", "Mar", "Jan", "Feb", "Mar"))
+```
+# Mengambil nilai integer pada factor
+Hal ini bisa dilakukan dengan menggunakan fungsi `as.integer`
+
+```{r}
+factor.bulan <- factor(c("Jan","Feb","Mar","Jan","Mar","Jan"))
+as.integer(factor.bulan)
+```
+
+# Mengganti suatu nilai di factor
+
+```{r}
+#Buatlah factor dengan teks "Jan", "Feb", "Mar","Jan","Mar", dan "Jan"
+factor.bulan <- factor(c("Jan","Feb","Mar","Jan","Mar","Jan"))
+#Mengganti levels 
+levels(factor.bulan)[2] <- "Januari"
+levels(factor.bulan)[3] <- "Maret"
+
+factor.bulan
+```
+# Angka sebagai kategori
+Angka juga bisa diubah menjadi factor. Karena nanti angka-angka ini akan diconvert terlebih dahulu.
+
+```{r}
+#Buatlah factor bernama factor.umur dengan isi c(12, 35, 24, 12, 35, 37)
+factor.umur <- factor(c(12, 35, 24, 12, 35, 37))
+
+#Tampilkan variable factor.umur 
+factor.umur
+```
+
+# NA, NaN, NULL, pada pembuatan Factor
+- NA dan NaN akan menjadi bagian isi factor, NULL dihilangkan
+- Hanya NaN yang akan dikenali sebagai levels
+
+```{r}
+factor(c("Bandung", "Jakarta", NA, "Jakarta", NaN, "Medan", NULL, NULL, "Bandung"))
+```
+# Menghitung panjang Factor
+Hanya nilai NULL yang tidak terhitung
+
+```{r}
+#Buatlah variable factor.lokasi dengan isi berupa vector c("Bandung", "Jakarta", NA, "Jakarta", NaN, "Medan", NULL, NULL, "Bandung") 
+factor.lokasi <- factor(c("Bandung", "Jakarta", NA, "Jakarta", NaN, "Medan", NULL, NULL, "Bandung"))
+#Tampilkan panjang dari variable factor.lokasi
+length(factor.lokasi)
+```
+# Menyusun Levels dari awal
+
+```{r}
+#Variable factor dengan isi vector c("Jan","Feb","Mar","Jan","Mar") 
+factor(c("Jan","Feb","Mar","Jan","Mar"), levels=c("Jan", "Feb", "Mar"))
+```
+
+
+

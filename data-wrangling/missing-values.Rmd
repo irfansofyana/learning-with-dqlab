@@ -1,0 +1,114 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+# Missing Values or Object
+
+## NA (Not Available)
+
+### Intro
+`NA` : Penanganan *missing value* di bahasa R
+
+```{r}
+NA
+typeof(NA)
+```
+
+### Pengecekan NA
+
+```{r}
+x <- NA
+
+x == NA # Salah (hasilnya = NA)
+is.na(x) # Benar
+```
+
+### Jenis NA
+```{r}
+typeof(NA_integer_)
+typeof(NA_real_)
+typeof(NA_complex_)
+typeof(NA_character_)
+is.na(NA_integer_)
+is.na(NA_real_)
+is.na(NA_complex_)
+is.na(NA_character_)
+```
+### Coercion
+Kemampuan bahasa R untuk mengubah tipe data `NA` menjadi tipe data lain seperti integer, real, dll.
+
+```{r}
+#Membuat vector bernama isi.vector dengan isi bilangan, dimana salah satunya memiliki missing value
+isi.vector <- c(1,2,3,NA,3,1)
+
+#Mengecek keseluruhan tipe data dengan perulangan lapply dan typeof
+lapply(isi.vector, typeof)
+
+#Menggunakan is.na untuk mengecek keberadaan missing value dari tiap elemen pada vector
+is.na(isi.vector)
+
+```
+## NULL
+`NULL` di bahasa R digunakan sebagai representasi *missing object*
+
+### Perbedaan `NULL` dengan `NA`
+`NA` masih dianggap sebagai object
+`NULL` tidak dianggap
+
+Contoh:
+
+```{r}
+#Membuat vector dengan 7 elemen termasuk NA dan NULL
+isi.vector <- c(1, 2, 3, NA, 5, NULL, 7) 
+
+#Menghitung jumlah elemen dari isi.vector
+length(isi.vector) # hasilnya bukan 7 tapi 6
+```
+### NULL dan List
+NULL di dalam list masih dianggap seperti objek, berbeda halnya dengan vector.
+
+```{r}
+isi.list <- list(1, NULL, 3, NA, 5)
+length(isi.list)
+```
+## INF
+INF digunakan untuk menyatakan infinite number. Setiap pembagian bilangan dengan 0 merupakan infinite number.
+
+```{r}
+1/0
+
+-20/0
+```
+## NaN
+Representasi matematika khusus yang tidak bisa mewakili angka apapun. Contohnya adalah 0/0
+
+```{r}
+0/0
+
+log(-100)
+```
+# Menghitung jumlah missing value
+Menggunakan kombinasi fungsi `sum` dan `is.na`
+
+```{r}
+isi.vector <- c(1,2,NA,4,5,NaN,6)
+sum(is.na(isi.vector) == TRUE)
+```
+
+
+
